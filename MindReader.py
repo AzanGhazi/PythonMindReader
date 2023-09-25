@@ -1,5 +1,6 @@
 import tkinter as tk
 import time
+import random
 from tkinter import ttk
 from tkinter import messagebox
 from tkinter import Toplevel
@@ -19,19 +20,17 @@ class ControllerPage(Toplevel):
         self.prog.pack()
         self.prog.step(5)
         self.prog.start(94)
-
+        chance = random.randint(0,1)
         
         self.after(2000, self.updateMessage)
         self.after(4000, self.updateMessage2)
-        self.after(6000, self.updateMessage3)
+        if chance == 1:
+            self.after(6000, self.updateMessage3)
+        else:
+            self.after(6000, self.updateMessage5)
         self.after(8000, self.updateMessage4)
         self.after(10000, self.finalFunction)
-        #self.after(4000, message2.text("Predicting Possibilities ..."))
-        #self.after(900, message2.text("Signing a Deal with Satan ..."))
-        #self.after(7000, message2.text("Reading Your Mind ..."))
-        #time.sleep(10)
-
-        #messagebox.showinfo("Mind Reader", thought)
+        
     def updateMessage(self):
         self.feedback.config(text  = "Parsing Memories ...")
     def updateMessage2(self):
@@ -74,10 +73,6 @@ class MainPage(tk.Tk):
             ControllerPage(self, thought)
         else:
             self.message.config(text = "Please Input a valid Integer from 1-99")
-        #print(thought)
-        
-        #tk.messagebox.showinfo("Mind Reader", "thought")
-        #ControllerPage(self, thought)
 
 if __name__ == "__main__":
     app = MainPage()
