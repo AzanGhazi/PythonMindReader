@@ -10,16 +10,13 @@ class ControllerPage(Toplevel):
         super().__init__(parent)
         self.geometry('300x60')
         self.title('Reading Mind')
-        #self.grid()
         self.thought = thought; 
 
         self.feedback = tk.Label(self, text = "Analyzing Brainwaves ...")
         self.feedback.pack()
-        #self.prog = ttk.Progressbar(self)
-        self.prog = ttk.Progressbar(self, orient= 'horizontal', length = 200, mode ='determinate')
+        self.prog = ttk.Progressbar(self, orient= 'horizontal', length = 200, maximum = 180, mode ='determinate')
         self.prog.pack()
-        self.prog.step(5)
-        self.prog.start(94)
+        self.prog.start()
         chance = random.randint(0,1)
         
         self.after(2000, self.updateMessage)
@@ -42,6 +39,7 @@ class ControllerPage(Toplevel):
     def updateMessage5(self):
         self.feedback.config(text  = "Downloading Thoughts ...")
     def finalFunction(self):
+        self.prog['value'] = 199
         self.prog.stop()
         time.sleep(.5)
         messagebox.showinfo("Mind Reader", "The Number you are thinking of is " + self.thought)
@@ -51,7 +49,6 @@ class ControllerPage(Toplevel):
 class MainPage(tk.Tk):
     def __init__(self):
         super().__init__()
-        #self.window = tk.Tk()
         self.geometry('300x100')
         self.title('Mind Reader')
         self.grid()
